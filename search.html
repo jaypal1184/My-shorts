@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Search - My Shorts</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .search-results {
+      padding: 20px;
+    }
+
+    .search-results h2 {
+      margin-bottom: 16px;
+    }
+
+    .video-result {
+      margin-bottom: 20px;
+    }
+
+    .video-result video {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .video-result p {
+      margin-top: 6px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="left-logo">My Shorts</div>
+    <div class="right-icons">
+      <button class="icon-btn"><i class="fas fa-search"></i></button>
+      <button class="icon-btn"><i class="fas fa-bell"></i></button>
+    </div>
+  </header>
+
+  <!-- Search Results Section -->
+  <main class="search-results">
+    <h2 id="searchTitle">Searching...</h2>
+    <div id="results"></div>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <a href="index.html"><i class="fas fa-home"></i><br>Home</a>
+    <a href="shorts.html"><i class="fas fa-video"></i><br>Shorts</a>
+    <a href="upload.html"><i class="fas fa-plus-circle"></i><br>Upload</a>
+    <a href="subscriptions.html"><i class="fas fa-tv"></i><br>Subs</a>
+    <a href="profile.html"><i class="fas fa-user"></i><br>Profile</a>
+  </nav>
+
+  <!-- Script to handle hashtag search -->
+  <script>
+    // Get hashtag from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const tag = urlParams.get('tag');
+    const searchTitle = document.getElementById('searchTitle');
+    const resultsDiv = document.getElementById('results');
+
+    if (tag) {
+      searchTitle.textContent = `Results for #${tag}`;
+
+      // Dummy example results – replace with real dynamic logic
+      const sampleResults = [
+        {
+          video: 'https://www.w3schools.com/html/mov_bbb.mp4',
+          title: `#${tag} - Powerful Motivation`
+        },
+        {
+          video: 'https://www.w3schools.com/html/movie.mp4',
+          title: `#${tag} - Life Changing Advice`
+        }
+      ];
+
+      sampleResults.forEach(item => {
+        const videoBlock = document.createElement('div');
+        videoBlock.classList.add('video-result');
+        videoBlock.innerHTML = `
+          <video controls src="${item.video}"></video>
+          <p>${item.title}</p>
+        `;
+        resultsDiv.appendChild(videoBlock);
+      });
+
+    } else {
+      searchTitle.textContent = "No hashtag found in URL!";
+    }
+  </script>
+
+</body>
+</html>
