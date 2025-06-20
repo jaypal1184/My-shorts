@@ -150,18 +150,73 @@ body {
   width: 50px;
 }
 
-function playVideo(src) {
-  const popup = document.getElementById("videoPopup");
-  const video = document.getElementById("popupVideo");
-  video.src = src;
-  popup.style.display = "flex";
-  video.play();
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #000;
+  color: #fff;
+  padding: 10px;
 }
 
-function closePopup() {
-  const popup = document.getElementById("videoPopup");
-  const video = document.getElementById("popupVideo");
-  video.pause();
-  video.src = "";
-  popup.style.display = "none";
+.header {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.video-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
+}
+
+.video-card {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3); /* 3D red glow shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  background: #111;
+}
+
+.video-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 15px 40px rgba(255, 0, 0, 0.5);
+}
+
+.video-card video {
+  width: 100%;
+  display: block;
+}
+
+/* Popup Player */
+.video-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 999;
+}
+
+.video-popup video {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+}
+
+.video-popup button {
+  margin-top: 20px;
+  background: red;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
 }
