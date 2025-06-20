@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: #f9f9f9;
+  padding-bottom: 60px;
+}
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.left-logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.right-icons {
+  display: flex;
+  gap: 16px;
+}
+
+.icon-btn {
+  background: none;
+  font-size: 22px;
+  border: none;
+  cursor: pointer;
+}
+
+.video-feed {
+  padding: 10px;
+}
+
+.video-card {
+  margin-bottom: 20px;
+}
+
+.thumbnail {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.video-details {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.channel-icon {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.video-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.channel-info {
+  color: #666;
+  font-size: 14px;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 6px 0;
+  border-top: 1px solid #ddd;
+}
+
+.bottom-nav a {
+  text-decoration: none;
+  text-align: center;
+  font-size: 12px;
+  color: #333;
+  flex: 1;
+}
+
+.bottom-nav i {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 2px;
+}
