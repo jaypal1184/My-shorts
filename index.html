@@ -44,32 +44,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Shorts</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h2 class="header">🔥 Trending Shorts</h2>
-  <div class="video-container">
-    <div class="video-card" onclick="playVideo('videos/video1.mp4')">
-      <video src="videos/video1.mp4" muted playsinline></video>
-    </div>
-    <div class="video-card" onclick="playVideo('videos/video2.mp4')">
-      <video src="videos/video2.mp4" muted playsinline></video>
-    </div>
-    <!-- Add more videos here -->
-  </div>
-
-  <!-- Popup Player -->
-  <div class="video-popup" id="videoPopup">
-    <video id="popupVideo" controls autoplay></video>
-    <button onclick="closePopup()">❌</button>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
