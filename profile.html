@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Shorts - Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #000;
+      transition: all 0.3s ease;
+    }
+
+    .header {
+      position: relative;
+      background-color: #f1f1f1;
+      height: 150px;
+      background-image: url('https://via.placeholder.com/720x150');
+      background-size: cover;
+    }
+
+    .profile-container {
+      text-align: center;
+      margin-top: -40px;
+    }
+
+    .profile-pic {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      background: #ccc;
+    }
+
+    .settings-icon {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 22px;
+      cursor: pointer;
+      color: #000;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      border-bottom: 1px solid #ddd;
+      margin-top: 15px;
+    }
+
+    .tab {
+      padding: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      color: red;
+      border-bottom: 2px solid red;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 15px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .settings-panel {
+      display: none;
+      background: #eee;
+      padding: 10px;
+      border-radius: 5px;
+      position: absolute;
+      right: 10px;
+      top: 60px;
+      width: 200px;
+      z-index: 999;
+    }
+
+    .dark-mode {
+      background: #121212;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <i class="fas fa-cog settings-icon" onclick="toggleSettings()"></i>
+  </div>
+
+  <div class="profile-container">
+    <div class="profile-pic"></div>
+    <!-- Name will come after login/dynamic -->
+  </div>
+
+  <!-- Settings Panel -->
+  <div id="settingsPanel" class="settings-panel">
+    <label><input type="checkbox" id="darkToggle" onchange="toggleDark()"> Dark Mode</label><br><br>
+    <label>
+      <select onchange="switchLang(this)">
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+      </select> Language
+    </label>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tab active" onclick="openTab('home')">Home</div>
+    <div class="tab" onclick="openTab('videos')">Videos</div>
+    <div class="tab" onclick="openTab('shorts')">Shorts</div>
+    <div class="tab" onclick="openTab('playlists')">Playlists</div>
+  </div>
+
+  <!-- Tab Contents -->
+  <div id="home" class="tab-content active">
+    <p>This is your Home tab content.</p>
+  </div>
+  <div id="videos" class="tab-content">
+    <p>Your videos will appear here.</p>
+  </div>
+  <div id="shorts" class="tab-content">
+    <p>Shorts go here.</p>
+  </div>
+  <div id="playlists" class="tab-content">
+    <p>Your playlists will be listed here.</p>
+  </div>
+
+  <script>
+    function openTab(id) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function toggleSettings() {
+      const panel = document.getElementById('settingsPanel');
+      panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function toggleDark() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    function switchLang(select) {
+      const lang = select.value;
+      alert(lang === "hi" ? "भाषा बदली गई: हिंदी" : "Language changed: English");
+    }
+  </script>
+
+</body>
+</html>
