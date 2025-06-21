@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Shorts</title>
+    <title>MY SHORTS</title>
     <style>
         * {
             margin: 0;
@@ -20,12 +20,12 @@
             touch-action: pan-y;
         }
         
-        /* Top Navigation */
-        .top-nav {
+        /* Top Bar with Logo */
+        .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 15px;
+            padding: 12px 16px;
             position: fixed;
             top: 0;
             left: 0;
@@ -35,42 +35,34 @@
         }
         
         .logo {
-            font-weight: bold;
-            font-size: 20px;
-            color: #ff0000;
-        }
-        
-        .search-bar {
             display: flex;
             align-items: center;
-            background-color: #222;
-            border-radius: 20px;
-            padding: 5px 15px;
-            width: 60%;
         }
         
-        .search-bar input {
-            background: transparent;
-            border: none;
+        .logo-my {
+            background-color: #ff0000;
             color: white;
-            padding: 5px;
-            width: 100%;
-            outline: none;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 4px;
+        }
+        
+        .logo-shorts {
+            font-weight: bold;
+            font-size: 18px;
+            color: #000;
+            background-color: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
         }
         
         /* Shorts Container */
-        .shorts-feed {
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-        
         .shorts-container {
             height: 100vh;
             width: 100%;
             position: relative;
-            scroll-snap-align: start;
         }
         
         .video-container {
@@ -104,12 +96,6 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
         
-        .video-stats {
-            font-size: 14px;
-            color: #aaa;
-            margin-bottom: 15px;
-        }
-        
         /* Creator Info */
         .creator-info {
             display: flex;
@@ -123,6 +109,7 @@
             border-radius: 50%;
             margin-right: 10px;
             object-fit: cover;
+            border: 2px solid white;
         }
         
         .creator-name {
@@ -142,9 +129,33 @@
             cursor: pointer;
         }
         
-        .subscribed-btn {
+        .subscribed {
             background-color: #606060;
-            color: white;
+        }
+        
+        /* Music Info */
+        .music-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            width: fit-content;
+        }
+        
+        .music-icon {
+            margin-right: 8px;
+            animation: rotate 2s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .music-name {
+            font-size: 12px;
         }
         
         /* Right Action Buttons */
@@ -181,25 +192,6 @@
             color: #fff;
         }
         
-        /* Music Info */
-        .music-info {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 5px 10px;
-            border-radius: 20px;
-            width: fit-content;
-        }
-        
-        .music-icon {
-            margin-right: 8px;
-        }
-        
-        .music-name {
-            font-size: 12px;
-        }
-        
         /* Bottom Navigation */
         .bottom-nav {
             position: fixed;
@@ -233,18 +225,81 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
 <body>
-    <!-- Top Navigation -->
-    <div class="top-nav">
-        <div class="logo">My Shorts</div>
-        <div class="search-bar">
-            <input type="text" placeholder="Search">
+    <!-- Top Bar with Logo -->
+    <div class="top-bar">
+        <div class="logo">
+            <div class="logo-my">MY</div>
+            <div class="logo-shorts">SHORTS</div>
+        </div>
+        <div class="spacer" style="flex-grow: 1;"></div>
+        <div class="search-icon">
             <span class="material-icons">search</span>
         </div>
     </div>
     
-    <!-- Shorts Feed with Multiple Videos -->
-    <div class="shorts-feed" id="shortsFeed">
-        <!-- Shorts will be loaded dynamically from Firebase -->
+    <!-- Shorts Video -->
+    <div class="shorts-container">
+        <div class="video-container">
+            <!-- Video will be loaded from Firebase -->
+            <video autoplay loop muted playsinline id="shortVideo">
+                Your browser does not support videos
+            </video>
+        </div>
+        
+        <!-- Video Info (Loaded from Firebase) -->
+        <div class="video-info">
+            <div class="video-title" id="videoTitle">Loading...</div>
+            
+            <!-- Creator Info -->
+            <div class="creator-info">
+                <img src="https://i.pravatar.cc/150?img=3" alt="Creator" class="creator-avatar" id="creatorAvatar">
+                <div class="creator-name" id="creatorName">Creator</div>
+                <button class="subscribe-btn" id="subscribeBtn">Subscribe</button>
+            </div>
+            
+            <!-- Music Info -->
+            <div class="music-info">
+                <span class="material-icons music-icon">music_note</span>
+                <div class="music-name" id="musicInfo">Original Sound - Creator</div>
+            </div>
+        </div>
+        
+        <!-- Right Action Buttons -->
+        <div class="action-buttons">
+            <div class="action-btn" id="likeBtn">
+                <div class="action-icon">
+                    <span class="material-icons like-icon">thumb_up</span>
+                </div>
+                <div class="action-count like-count">0</div>
+            </div>
+            
+            <div class="action-btn" id="dislikeBtn">
+                <div class="action-icon">
+                    <span class="material-icons dislike-icon">thumb_down</span>
+                </div>
+                <div class="action-count dislike-count">Dislike</div>
+            </div>
+            
+            <div class="action-btn" id="commentBtn">
+                <div class="action-icon">
+                    <span class="material-icons">comment</span>
+                </div>
+                <div class="action-count comment-count">0</div>
+            </div>
+            
+            <div class="action-btn" id="shareBtn">
+                <div class="action-icon">
+                    <span class="material-icons">share</span>
+                </div>
+                <div class="action-count">Share</div>
+            </div>
+            
+            <div class="action-btn" id="moreBtn">
+                <div class="action-icon">
+                    <span class="material-icons">more_vert</span>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Bottom Navigation -->
@@ -272,7 +327,7 @@
     </div>
 
     <script>
-        // Firebase Configuration
+        // Firebase Configuration (Replace with your config)
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
@@ -284,253 +339,170 @@
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
         const db = firebase.firestore();
+        const auth = firebase.auth();
 
         // DOM Elements
-        const shortsFeed = document.getElementById('shortsFeed');
+        const shortVideo = document.getElementById('shortVideo');
+        const videoTitle = document.getElementById('videoTitle');
+        const creatorAvatar = document.getElementById('creatorAvatar');
+        const creatorName = document.getElementById('creatorName');
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        const musicInfo = document.getElementById('musicInfo');
+        const likeBtn = document.getElementById('likeBtn');
+        const likeCount = document.querySelector('.like-count');
+        const dislikeBtn = document.getElementById('dislikeBtn');
+        const commentBtn = document.getElementById('commentBtn');
+        const commentCount = document.querySelector('.comment-count');
+        const shareBtn = document.getElementById('shareBtn');
 
-        // User state
+        // Current Video Data
+        let currentVideo = null;
         let currentUser = null;
-        let subscriptions = [];
+        let isSubscribed = false;
+        let isLiked = false;
+        let isDisliked = false;
 
         // Initialize the app
         function initApp() {
-            // Listen for auth state changes
+            // Auth state listener
             auth.onAuthStateChanged(user => {
                 currentUser = user;
-                if (user) {
-                    // Load user subscriptions
-                    loadSubscriptions();
+                loadRandomShort();
+            });
+
+            // Set up event listeners
+            subscribeBtn.addEventListener('click', toggleSubscribe);
+            likeBtn.addEventListener('click', toggleLike);
+            dislikeBtn.addEventListener('click', toggleDislike);
+            commentBtn.addEventListener('click', showComments);
+            shareBtn.addEventListener('click', shareVideo);
+        }
+
+        // Load a random short from Firebase
+        function loadRandomShort() {
+            db.collection('shorts').get().then(snapshot => {
+                const shorts = [];
+                snapshot.forEach(doc => shorts.push(doc.data()));
+                
+                if(shorts.length > 0) {
+                    currentVideo = shorts[Math.floor(Math.random() * shorts.length)];
+                    displayVideo(currentVideo);
                 }
-                // Load shorts regardless of auth state
-                loadShorts();
             });
         }
 
-        // Load subscriptions from Firestore
-        function loadSubscriptions() {
-            db.collection('users').doc(currentUser.uid).collection('subscriptions')
-                .onSnapshot(snapshot => {
-                    subscriptions = [];
-                    snapshot.forEach(doc => {
-                        subscriptions.push(doc.id);
-                    });
-                    // Update subscribe buttons
-                    updateSubscribeButtons();
-                });
+        // Display the video
+        function displayVideo(video) {
+            shortVideo.src = video.videoUrl;
+            videoTitle.textContent = video.title;
+            creatorAvatar.src = video.creatorAvatar;
+            creatorName.textContent = video.creatorName;
+            musicInfo.textContent = video.music || "Original Sound";
+            likeCount.textContent = formatNumber(video.likes || 0);
+            commentCount.textContent = formatNumber(video.comments || 0);
+            
+            // Check subscription status (if logged in)
+            if(currentUser) checkSubscriptionStatus();
         }
 
-        // Load shorts from Firestore
-        function loadShorts() {
-            db.collection('shorts').orderBy('timestamp', 'desc').limit(10)
-                .onSnapshot(snapshot => {
-                    shortsFeed.innerHTML = '';
-                    snapshot.forEach(doc => {
-                        const short = doc.data();
-                        addShortToFeed(short, doc.id);
-                    });
-                    // Initialize video autoplay
-                    initVideoAutoplay();
-                });
-        }
-
-        // Add short to the feed
-        function addShortToFeed(short, shortId) {
-            const shortElement = document.createElement('div');
-            shortElement.className = 'shorts-container';
-            shortElement.dataset.shortId = shortId;
-            
-            shortElement.innerHTML = `
-                <div class="video-container">
-                    <video autoplay loop muted playsinline>
-                        <source src="${short.videoUrl}" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="video-info">
-                    <div class="video-title">${short.title}</div>
-                    <div class="video-stats">${formatNumber(short.views)} views</div>
-                    
-                    <div class="creator-info">
-                        <img src="${short.creatorAvatar}" alt="Creator" class="creator-avatar">
-                        <div class="creator-name">${short.creatorName}</div>
-                        <button class="subscribe-btn" data-creator-id="${short.creatorId}">Subscribe</button>
-                    </div>
-                    
-                    <div class="music-info">
-                        <span class="material-icons music-icon">music_note</span>
-                        <div class="music-name">${short.music}</div>
-                    </div>
-                </div>
-                
-                <div class="action-buttons">
-                    <div class="action-btn like-btn" data-short-id="${shortId}">
-                        <div class="action-icon">
-                            <span class="material-icons like-icon">thumb_up</span>
-                        </div>
-                        <div class="action-count like-count">${formatNumber(short.likes)}</div>
-                    </div>
-                    
-                    <div class="action-btn">
-                        <div class="action-icon">
-                            <span class="material-icons">thumb_down</span>
-                        </div>
-                        <div class="action-count">Dislike</div>
-                    </div>
-                    
-                    <div class="action-btn">
-                        <div class="action-icon">
-                            <span class="material-icons">comment</span>
-                        </div>
-                        <div class="action-count">${formatNumber(short.comments)}</div>
-                    </div>
-                    
-                    <div class="action-btn">
-                        <div class="action-icon">
-                            <span class="material-icons">share</span>
-                        </div>
-                        <div class="action-count">Share</div>
-                    </div>
-                    
-                    <div class="action-btn">
-                        <div class="action-icon">
-                            <span class="material-icons">more_vert</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            shortsFeed.appendChild(shortElement);
-            
-            // Add event listeners
-            const likeBtn = shortElement.querySelector('.like-btn');
-            const subscribeBtn = shortElement.querySelector('.subscribe-btn');
-            
-            likeBtn.addEventListener('click', handleLike);
-            subscribeBtn.addEventListener('click', handleSubscribe);
-        }
-
-        // Handle like action
-        function handleLike(e) {
-            if (!currentUser) {
-                alert('Please sign in to like videos');
+        // Toggle subscribe status
+        function toggleSubscribe() {
+            if(!currentUser) {
+                alert("Please sign in to subscribe");
                 return;
             }
             
-            const shortId = e.currentTarget.dataset.shortId;
-            const likeIcon = e.currentTarget.querySelector('.like-icon');
-            const likeCountElement = e.currentTarget.querySelector('.like-count');
-            let likeCount = parseInt(likeCountElement.textContent.replace(/,/g, ''));
+            isSubscribed = !isSubscribed;
             
-            // Check if already liked
-            db.collection('shorts').doc(shortId).collection('likes').doc(currentUser.uid)
-                .get()
-                .then(doc => {
-                    if (doc.exists) {
-                        // Unlike
-                        db.collection('shorts').doc(shortId).collection('likes').doc(currentUser.uid).delete();
-                        db.collection('shorts').doc(shortId).update({
-                            likes: firebase.firestore.FieldValue.increment(-1)
-                        });
-                        likeIcon.style.color = '#fff';
-                        likeCountElement.textContent = formatNumber(likeCount - 1);
-                    } else {
-                        // Like
-                        db.collection('shorts').doc(shortId).collection('likes').doc(currentUser.uid).set({
-                            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                        });
-                        db.collection('shorts').doc(shortId).update({
-                            likes: firebase.firestore.FieldValue.increment(1)
-                        });
-                        likeIcon.style.color = '#ff0000';
-                        likeCountElement.textContent = formatNumber(likeCount + 1);
-                    }
-                });
-        }
-
-        // Handle subscribe action
-        function handleSubscribe(e) {
-            if (!currentUser) {
-                alert('Please sign in to subscribe');
-                return;
-            }
-            
-            const creatorId = e.currentTarget.dataset.creatorId;
-            const isSubscribed = subscriptions.includes(creatorId);
-            
-            if (isSubscribed) {
-                // Unsubscribe
-                db.collection('users').doc(currentUser.uid).collection('subscriptions').doc(creatorId).delete();
-                e.target.textContent = 'Subscribe';
-                e.target.classList.remove('subscribed-btn');
-                e.target.style.backgroundColor = '#ff0000';
+            if(isSubscribed) {
+                subscribeBtn.textContent = "Subscribed";
+                subscribeBtn.classList.add('subscribed');
+                // Add to Firebase subscriptions
+                db.collection('users').doc(currentUser.uid)
+                    .collection('subscriptions').doc(currentVideo.creatorId)
+                    .set({ timestamp: firebase.firestore.FieldValue.serverTimestamp() });
             } else {
-                // Subscribe
-                db.collection('users').doc(currentUser.uid).collection('subscriptions').doc(creatorId).set({
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                e.target.textContent = 'Subscribed';
-                e.target.classList.add('subscribed-btn');
-                e.target.style.backgroundColor = '#606060';
+                subscribeBtn.textContent = "Subscribe";
+                subscribeBtn.classList.remove('subscribed');
+                // Remove from Firebase subscriptions
+                db.collection('users').doc(currentUser.uid)
+                    .collection('subscriptions').doc(currentVideo.creatorId)
+                    .delete();
             }
         }
 
-        // Update subscribe buttons based on current subscriptions
-        function updateSubscribeButtons() {
-            document.querySelectorAll('.subscribe-btn').forEach(btn => {
-                const creatorId = btn.dataset.creatorId;
-                if (subscriptions.includes(creatorId)) {
-                    btn.textContent = 'Subscribed';
-                    btn.classList.add('subscribed-btn');
-                    btn.style.backgroundColor = '#606060';
-                } else {
-                    btn.textContent = 'Subscribe';
-                    btn.classList.remove('subscribed-btn');
-                    btn.style.backgroundColor = '#ff0000';
-                }
-            });
+        // Check if user is subscribed
+        function checkSubscriptionStatus() {
+            db.collection('users').doc(currentUser.uid)
+                .collection('subscriptions').doc(currentVideo.creatorId)
+                .get().then(doc => {
+                    isSubscribed = doc.exists;
+                    subscribeBtn.textContent = isSubscribed ? "Subscribed" : "Subscribe";
+                    subscribeBtn.classList.toggle('subscribed', isSubscribed);
+                });
         }
 
-        // Initialize video autoplay
-        function initVideoAutoplay() {
-            const videos = document.querySelectorAll('video');
-            
-            function handleScroll() {
-                const feedRect = shortsFeed.getBoundingClientRect();
-                
-                videos.forEach(video => {
-                    const videoRect = video.getBoundingClientRect();
-                    
-                    // Check if at least 50% of video is visible
-                    if (videoRect.top >= feedRect.top - (videoRect.height * 0.5) && 
-                        videoRect.bottom <= feedRect.bottom + (videoRect.height * 0.5)) {
-                        video.play();
-                    } else {
-                        video.pause();
-                    }
-                });
+        // Toggle like
+        function toggleLike() {
+            if(!currentUser) {
+                alert("Please sign in to like");
+                return;
             }
             
-            // Debounce scroll events for performance
-            let isScrolling;
-            shortsFeed.addEventListener('scroll', () => {
-                window.clearTimeout(isScrolling);
-                isScrolling = setTimeout(handleScroll, 100);
-            });
+            isLiked = !isLiked;
+            const likeIcon = likeBtn.querySelector('.material-icons');
             
-            // Initial check
-            handleScroll();
+            if(isLiked) {
+                likeIcon.style.color = "#ff0000";
+                likeCount.textContent = formatNumber(parseInt(likeCount.textContent) + 1);
+                // Add like to Firebase
+                db.collection('shorts').doc(currentVideo.id)
+                    .update({ likes: firebase.firestore.FieldValue.increment(1) });
+            } else {
+                likeIcon.style.color = "#fff";
+                likeCount.textContent = formatNumber(parseInt(likeCount.textContent) - 1);
+                // Remove like from Firebase
+                db.collection('shorts').doc(currentVideo.id)
+                    .update({ likes: firebase.firestore.FieldValue.increment(-1) });
+            }
+        }
+
+        // Toggle dislike
+        function toggleDislike() {
+            if(!currentUser) {
+                alert("Please sign in to dislike");
+                return;
+            }
+            
+            isDisliked = !isDisliked;
+            const dislikeIcon = dislikeBtn.querySelector('.material-icons');
+            dislikeIcon.style.color = isDisliked ? "#ff0000" : "#fff";
+        }
+
+        // Show comments
+        function showComments() {
+            alert("Comments section will load from Firebase");
+            // In full implementation, load comments from Firestore
+        }
+
+        // Share video
+        function shareVideo() {
+            if(navigator.share) {
+                navigator.share({
+                    title: currentVideo.title,
+                    text: 'Check out this short video!',
+                    url: window.location.href,
+                }).catch(console.error);
+            } else {
+                alert("Web Share API not supported in your browser");
+            }
         }
 
         // Format numbers (1000 -> 1K)
         function formatNumber(num) {
-            if (num >= 1000000) {
-                return (num / 1000000).toFixed(1) + 'M';
-            }
-            if (num >= 1000) {
-                return (num / 1000).toFixed(1) + 'K';
-            }
+            if(num >= 1000000) return (num/1000000).toFixed(1) + "M";
+            if(num >= 1000) return (num/1000).toFixed(1) + "K";
             return num.toString();
         }
 
@@ -538,4 +510,4 @@
         initApp();
     </script>
 </body>
-  </html>
+	</html>
