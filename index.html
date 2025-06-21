@@ -14,7 +14,7 @@
         
         body {
             background-color: #f9f9f9;
-            color: #030303;
+            margin-bottom: 60px;
         }
         
         /* Header */
@@ -22,17 +22,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 1.5rem;
+            padding: 12px;
             position: sticky;
             top: 0;
             background-color: white;
             z-index: 100;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
         }
         
         .logo {
@@ -43,60 +38,55 @@
         .logo-my {
             background-color: #ff0000;
             color: white;
-            padding: 2px 4px;
+            padding: 2px 6px;
             border-radius: 4px;
             font-weight: bold;
             font-size: 18px;
-            margin-right: 2px;
+            margin-right: 4px;
         }
         
         .logo-shorts {
             font-weight: bold;
             font-size: 18px;
-            color: black;
+            color: #000;
         }
         
-        .search-bar {
+        .search-container {
             display: flex;
             align-items: center;
-            width: 40%;
-            max-width: 600px;
+            position: relative;
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 15px;
         }
         
-        .search-bar input {
+        .search-input {
             width: 100%;
-            padding: 0.5rem 1rem;
-            border: 1px solid #ccc;
-            border-radius: 20px 0 0 20px;
-            font-size: 1rem;
+            padding: 8px 15px 8px 35px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
             outline: none;
         }
         
-        .search-btn {
-            background-color: #f8f8f8;
-            border: 1px solid #ccc;
-            border-left: none;
-            border-radius: 0 20px 20px 0;
-            padding: 0.5rem 1.25rem;
-            cursor: pointer;
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            color: #606060;
+            pointer-events: none;
         }
         
-        .icons-container {
-            display: flex;
-            align-items: center;
-        }
-        
-        .header-icon {
-            margin-left: 1.5rem;
-            cursor: pointer;
+        .notification-btn {
             position: relative;
+            cursor: pointer;
+            margin-left: 15px;
         }
         
         .notification-badge {
             position: absolute;
             top: -5px;
             right: -5px;
-            background-color: #cc0000;
+            background-color: #ff0000;
             color: white;
             border-radius: 50%;
             width: 18px;
@@ -107,66 +97,16 @@
             font-size: 10px;
         }
         
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 60px;
-            bottom: 0;
-            width: 240px;
-            background-color: white;
-            padding: 1rem 0;
-            overflow-y: auto;
-        }
-        
-        .sidebar-item {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 1.5rem;
-            cursor: pointer;
-        }
-        
-        .sidebar-item:hover {
-            background-color: #f2f2f2;
-        }
-        
-        .sidebar-item.active {
-            background-color: #e5e5e5;
-            font-weight: 500;
-        }
-        
-        .sidebar-icon {
-            margin-right: 1rem;
-            color: #606060;
-        }
-        
-        .sidebar-item.active .sidebar-icon {
-            color: #ff0000;
-        }
-        
-        /* Main Content */
-        .main-content {
-            margin-left: 240px;
-            padding-top: 20px;
-        }
-        
         /* Categories */
         .categories {
             display: flex;
-            padding: 0.75rem 1.5rem;
+            padding: 12px 15px;
+            overflow-x: auto;
+            scrollbar-width: none;
             background-color: white;
             position: sticky;
             top: 60px;
             z-index: 90;
-            overflow-x: auto;
-            scrollbar-width: none;
         }
         
         .categories::-webkit-scrollbar {
@@ -174,31 +114,27 @@
         }
         
         .category {
-            margin-right: 1rem;
-            padding: 0.5rem 0.75rem;
+            padding: 6px 12px;
+            margin-right: 10px;
             background-color: #f2f2f2;
             border-radius: 16px;
             white-space: nowrap;
             cursor: pointer;
-            font-size: 0.9rem;
-            transition: background-color 0.2s;
-        }
-        
-        .category:hover {
-            background-color: #e5e5e5;
+            font-size: 14px;
+            transition: all 0.2s;
         }
         
         .category.active {
-            background-color: #030303;
+            background-color: #000;
             color: white;
         }
         
-        /* Videos Grid */
-        .videos-container {
+        /* Video Grid */
+        .videos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            padding: 1.5rem;
+            gap: 20px;
+            padding: 15px;
         }
         
         .video-card {
@@ -207,30 +143,37 @@
         }
         
         .video-card:hover {
-            transform: scale(1.02);
+            transform: translateY(-5px);
         }
         
         .thumbnail-container {
             position: relative;
-            margin-bottom: 0.75rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
         }
         
         .thumbnail {
             width: 100%;
-            border-radius: 12px;
             aspect-ratio: 16/9;
             object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .video-card:hover .thumbnail {
+            transform: scale(1.03);
         }
         
         .duration {
             position: absolute;
-            bottom: 0.5rem;
-            right: 0.5rem;
+            bottom: 8px;
+            right: 8px;
             background-color: rgba(0,0,0,0.8);
             color: white;
-            padding: 0.2rem 0.4rem;
+            padding: 3px 6px;
             border-radius: 4px;
-            font-size: 0.8rem;
+            font-size: 12px;
         }
         
         .video-info {
@@ -242,7 +185,7 @@
             height: 36px;
             border-radius: 50%;
             object-fit: cover;
-            margin-right: 0.75rem;
+            margin-right: 12px;
         }
         
         .video-details {
@@ -251,7 +194,7 @@
         
         .video-title {
             font-weight: 500;
-            margin-bottom: 0.3rem;
+            margin-bottom: 4px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -259,14 +202,67 @@
         }
         
         .channel-name {
-            font-size: 0.9rem;
+            font-size: 14px;
             color: #606060;
-            margin-bottom: 0.2rem;
+            margin-bottom: 2px;
         }
         
         .video-stats {
-            font-size: 0.9rem;
+            font-size: 14px;
             color: #606060;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 100;
+            box-shadow: 0 -1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #606060;
+            font-size: 10px;
+            text-decoration: none;
+            flex: 1;
+        }
+        
+        .nav-btn.active {
+            color: #ff0000;
+        }
+        
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 3px;
+        }
+        
+        .upload-container {
+            position: relative;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .upload-btn {
+            background-color: #ff0000;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         
         /* Video Popup */
@@ -283,12 +279,13 @@
             align-items: center;
         }
         
-        .video-popup-content {
+        .popup-content {
             width: 90%;
             max-width: 1000px;
             background-color: white;
             border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
         
         .popup-video {
@@ -301,37 +298,42 @@
             top: 20px;
             right: 20px;
             color: white;
-            font-size: 2rem;
+            font-size: 30px;
             cursor: pointer;
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .sidebar {
-                display: none;
-            }
-            
-            .main-content {
-                margin-left: 0;
-            }
-            
-            .search-bar {
-                width: 50%;
-            }
-            
-            .videos-container {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
+        /* Auth UI */
+        .auth-ui {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
         }
         
-        @media (max-width: 576px) {
-            .header {
-                padding: 1rem;
-            }
-            
-            .search-bar {
-                display: none;
-            }
+        .auth-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        .auth-btn {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-weight: bold;
         }
     </style>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -339,123 +341,122 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="logo-container">
-            <div class="logo">
-                <div class="logo-my">MY</div>
-                <div class="logo-shorts">SHORTS</div>
-            </div>
+        <div class="logo">
+            <div class="logo-my">MY</div>
+            <div class="logo-shorts">SHORTS</div>
         </div>
         
-        <div class="search-bar">
-            <input type="text" placeholder="Search" id="searchInput">
-            <button class="search-btn" id="searchBtn">
-                <span class="material-icons">search</span>
-            </button>
+        <div class="search-container">
+            <span class="material-icons search-icon">search</span>
+            <input type="text" placeholder="Search" class="search-input" id="searchInput">
         </div>
         
-        <div class="icons-container">
-            <div class="header-icon">
-                <span class="material-icons">video_call</span>
-            </div>
-            <div class="header-icon">
-                <span class="material-icons">apps</span>
-            </div>
-            <div class="header-icon" id="notificationIcon">
-                <span class="material-icons">notifications</span>
-                <span class="notification-badge" id="notificationBadge">0</span>
-            </div>
-            <div class="header-icon">
-                <img src="https://i.pravatar.cc/150?img=5" alt="User" class="user-avatar" id="userAvatar">
-            </div>
+        <div class="notification-btn" id="notificationBtn">
+            <span class="material-icons">notifications</span>
+            <span class="notification-badge" id="notificationBadge">3</span>
         </div>
     </header>
     
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="sidebar-item active" data-page="home">
-            <span class="material-icons sidebar-icon">home</span>
-            <span>Home</span>
-        </div>
-        <div class="sidebar-item" data-page="shorts">
-            <span class="material-icons sidebar-icon">ondemand_video</span>
-            <span>Shorts</span>
-        </div>
-        <div class="sidebar-item" data-page="subscriptions">
-            <span class="material-icons sidebar-icon">subscriptions</span>
-            <span>Subscriptions</span>
-        </div>
-        <div class="sidebar-item" data-page="you">
-            <span class="material-icons sidebar-icon">video_library</span>
-            <span>You</span>
-        </div>
+    <!-- Categories -->
+    <div class="categories" id="categories">
+        <div class="category active" data-category="all">All</div>
+        <div class="category" data-category="motivational">Motivational</div>
+        <div class="category" data-category="vlog">Vlog</div>
+        <div class="category" data-category="music">Music</div>
+        <div class="category" data-category="gym">Gym</div>
+        <div class="category" data-category="travel">Travel</div>
     </div>
     
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Categories -->
-        <div class="categories" id="categories">
-            <div class="category active" data-category="all">All</div>
-            <div class="category" data-category="motivational">Motivational</div>
-            <div class="category" data-category="news">News</div>
-            <div class="category" data-category="funny">Funny</div>
-            <div class="category" data-category="music">Music</div>
-            <div class="category" data-category="gym">Gym</div>
-        </div>
-        
-        <!-- Videos Grid -->
-        <div class="videos-container" id="videosContainer">
-            <!-- Videos will be loaded from Firebase -->
-        </div>
+    <!-- Videos Grid -->
+    <div class="videos-grid" id="videosGrid">
+        <!-- Videos will be loaded from Firebase -->
     </div>
+    
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-btn active" id="homeBtn">
+            <span class="material-icons nav-icon">home</span>
+            <span>Home</span>
+        </a>
+        <a href="shorts.html" class="nav-btn" id="shortsBtn">
+            <span class="material-icons nav-icon">ondemand_video</span>
+            <span>Shorts</span>
+        </a>
+        <div class="upload-container">
+            <div class="upload-btn" id="uploadBtn">
+                <span class="material-icons">add</span>
+            </div>
+        </div>
+        <a href="#" class="nav-btn" id="subscriptionsBtn">
+            <span class="material-icons nav-icon">subscriptions</span>
+            <span>Subscriptions</span>
+        </a>
+    </div>
+    <a href="#" class="nav-btn" id="profileBtn">
+            <span class="material-icons nav-icon">profile</span>
+            <span>profile</span>
+    </a>
+</div>
     
     <!-- Video Popup -->
     <div class="video-popup" id="videoPopup">
         <span class="material-icons popup-close" id="popupClose">close</span>
-        <div class="video-popup-content">
-            <video controls class="popup-video" id="popupVideo">
-                Your browser does not support the video tag.
-            </video>
+        <div class="popup-content">
+            <video controls class="popup-video" id="popupVideo"></video>
+        </div>
+    </div>
+    
+    <!-- Auth UI -->
+    <div class="auth-ui" id="authUI">
+        <div class="auth-container">
+            <h3>Sign In Required</h3>
+            <p>You need to sign in to access this feature</p>
+            <button class="auth-btn" id="signInBtn">Sign In with Google</button>
+            <button class="auth-btn" id="closeAuthBtn" style="background-color: #606060;">Cancel</button>
         </div>
     </div>
 
     <script>
-        // Firebase Configuration - REPLACE WITH YOUR CONFIG
+        // Firebase Configuration (Replace with your config)
         const firebaseConfig = {
-            apiKey: "AIzaSyABCD1234...",
-            authDomain: "my-shorts-app.firebaseapp.com",
-            projectId: "my-shorts-app",
-            storageBucket: "my-shorts-app.appspot.com",
-            messagingSenderId: "1234567890",
-            appId: "1:1234567890:web:abcdef1234567890"
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
         };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
         const auth = firebase.auth();
-
+        const storage = firebase.storage();
+        
         // DOM Elements
-        const videosContainer = document.getElementById('videosContainer');
+        const videosGrid = document.getElementById('videosGrid');
         const videoPopup = document.getElementById('videoPopup');
         const popupVideo = document.getElementById('popupVideo');
         const popupClose = document.getElementById('popupClose');
         const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.getElementById('searchBtn');
-        const notificationIcon = document.getElementById('notificationIcon');
+        const notificationBtn = document.getElementById('notificationBtn');
         const notificationBadge = document.getElementById('notificationBadge');
-        const userAvatar = document.getElementById('userAvatar');
-        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const authUI = document.getElementById('authUI');
+        const signInBtn = document.getElementById('signInBtn');
+        const closeAuthBtn = document.getElementById('closeAuthBtn');
         const categories = document.querySelectorAll('.category');
-
+        
         // App State
         let currentUser = null;
         let currentCategory = 'all';
         let videos = [];
-
+        
         // Initialize App
         function initApp() {
             // Auth State Listener
@@ -463,68 +464,40 @@
                 currentUser = user;
                 updateUI();
                 loadVideos();
-                if (user) loadNotifications();
+                if(user) loadNotifications();
             });
-
+            
             // Event Listeners
             popupClose.addEventListener('click', closeVideoPopup);
-            searchBtn.addEventListener('click', handleSearch);
             searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') handleSearch();
+                if(e.key === 'Enter') searchVideos();
             });
-            notificationIcon.addEventListener('click', showNotifications);
-
-            // Sidebar Navigation
-            sidebarItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    sidebarItems.forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-                    // Here you would load different content based on the page
-                    // For now we'll just show a message
-                    alert(`Loading ${item.dataset.page} page...`);
-                });
-            });
-
-            // Category Filter
+            notificationBtn.addEventListener('click', showNotifications);
+            uploadBtn.addEventListener('click', handleUpload);
+            signInBtn.addEventListener('click', signIn);
+            closeAuthBtn.addEventListener('click', () => authUI.style.display = 'none');
+            
+            // Category Selection
             categories.forEach(category => {
                 category.addEventListener('click', () => {
-                    categories.forEach(c => c.classList.remove('active'));
+                    document.querySelector('.category.active').classList.remove('active');
                     category.classList.add('active');
                     currentCategory = category.dataset.category;
                     loadVideos();
                 });
             });
         }
-
-        // Update UI based on auth state
-        function updateUI() {
-            if (currentUser) {
-                // Set user avatar
-                if (currentUser.photoURL) {
-                    userAvatar.src = currentUser.photoURL;
-                } else {
-                    // Default avatar with initial
-                    const initial = currentUser.displayName ? currentUser.displayName.charAt(0).toUpperCase() : 'U';
-                    userAvatar.src = `https://ui-avatars.com/api/?name=${initial}&background=random&color=fff`;
-                }
-            } else {
-                // Default avatar when logged out
-                userAvatar.src = "https://i.pravatar.cc/150?img=5";
-            }
-        }
-
+        
         // Load Videos from Firestore
         function loadVideos() {
-            let query = db.collection('videos')
-                .orderBy('timestamp', 'desc')
-                .limit(20);
-
-            if (currentCategory !== 'all') {
+            let query = db.collection('videos').orderBy('timestamp', 'desc').limit(20);
+            
+            if(currentCategory !== 'all') {
                 query = query.where('category', '==', currentCategory);
             }
-
-            query.get().then(snapshot => {
-                videosContainer.innerHTML = '';
+            
+            query.onSnapshot(snapshot => {
+                videosGrid.innerHTML = '';
                 videos = [];
                 snapshot.forEach(doc => {
                     const video = doc.data();
@@ -532,11 +505,9 @@
                     videos.push(video);
                     renderVideo(video);
                 });
-            }).catch(error => {
-                console.error("Error loading videos:", error);
             });
         }
-
+        
         // Render Video Card
         function renderVideo(video) {
             const videoElement = document.createElement('div');
@@ -562,9 +533,9 @@
                 playVideo(video);
             });
             
-            videosContainer.appendChild(videoElement);
+            videosGrid.appendChild(videoElement);
         }
-
+        
         // Play Video in Popup
         function playVideo(video) {
             popupVideo.src = video.videoUrl;
@@ -576,99 +547,178 @@
                 views: firebase.firestore.FieldValue.increment(1)
             });
         }
-
+        
         // Close Video Popup
         function closeVideoPopup() {
             popupVideo.pause();
             videoPopup.style.display = 'none';
         }
-
-        // Handle Search
-        function handleSearch() {
-            const query = searchInput.value.trim();
-            if (query) {
-                // In a real app, you would implement actual search functionality
-                alert(`Searching for: ${query}`);
+        
+        // Search Videos
+        function searchVideos() {
+            const query = searchInput.value.trim().toLowerCase();
+            if(query) {
+                videosGrid.innerHTML = '';
+                videos.forEach(video => {
+                    if(video.title.toLowerCase().includes(query)) {
+                        renderVideo(video);
+                    }
+                });
+            } else {
+                loadVideos();
             }
         }
-
+        
         // Load Notifications
         function loadNotifications() {
+            if(!currentUser) return;
+            
             db.collection('notifications')
                 .where('userId', '==', currentUser.uid)
                 .where('read', '==', false)
                 .onSnapshot(snapshot => {
-                    const count = snapshot.size;
-                    notificationBadge.textContent = count;
-                    notificationBadge.style.display = count > 0 ? 'flex' : 'none';
+                    notificationBadge.textContent = snapshot.size;
+                    notificationBadge.style.display = snapshot.size > 0 ? 'flex' : 'none';
                 });
         }
-
+        
         // Show Notifications
         function showNotifications() {
-            if (currentUser) {
-                alert("Showing your notifications");
-                // Mark notifications as read
-                db.collection('notifications')
-                    .where('userId', '==', currentUser.uid)
-                    .where('read', '==', false)
-                    .get()
-                    .then(snapshot => {
-                        const batch = db.batch();
-                        snapshot.forEach(doc => {
-                            batch.update(doc.ref, { read: true });
-                        });
-                        return batch.commit();
+            if(!currentUser) {
+                authUI.style.display = 'flex';
+                return;
+            }
+            alert("Showing your notifications");
+            // Mark as read
+            db.collection('notifications')
+                .where('userId', '==', currentUser.uid)
+                .where('read', '==', false)
+                .get()
+                .then(snapshot => {
+                    const batch = db.batch();
+                    snapshot.forEach(doc => {
+                        batch.update(doc.ref, { read: true });
                     });
-            } else {
-                alert("Please sign in to view notifications");
+                    return batch.commit();
+                });
+        }
+        
+        // Handle Upload
+        function handleUpload() {
+            if(!currentUser) {
+                authUI.style.display = 'flex';
+                return;
+            }
+            
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'video/*';
+            
+            fileInput.onchange = e => {
+                const file = e.target.files[0];
+                if(file) uploadVideo(file);
+            };
+            
+            fileInput.click();
+        }
+        
+        // Upload Video
+        function uploadVideo(file) {
+            const storageRef = storage.ref(`videos/${currentUser.uid}/${Date.now()}_${file.name}`);
+            const uploadTask = storageRef.put(file);
+            
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload: ' + progress + '%');
+                },
+                (error) => {
+                    console.error("Upload failed:", error);
+                    alert("Upload failed: " + error.message);
+                },
+                () => {
+                    uploadTask.snapshot.ref.getDownloadURL().then(url => {
+                        saveVideoData(url, file.name);
+                    });
+                }
+            );
+        }
+        
+        // Save Video Data
+        function saveVideoData(url, filename) {
+            db.collection('videos').add({
+                title: filename.replace(/\.[^/.]+$/, ""),
+                videoUrl: url,
+                thumbnail: "https://i.ytimg.com/vi/.../hqdefault.jpg", // Generate thumbnail
+                channelId: currentUser.uid,
+                channelName: currentUser.displayName || "Anonymous",
+                channelAvatar: currentUser.photoURL || "",
+                views: 0,
+                likes: 0,
+                comments: 0,
+                duration: 0, // Extract duration from video
+                category: currentCategory,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                alert("Video uploaded successfully!");
+            });
+        }
+        
+        // Sign In
+        function signIn() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(() => {
+                    authUI.style.display = 'none';
+                })
+                .catch(error => {
+                    console.error("Sign in failed:", error);
+                });
+        }
+        
+        // Update UI
+        function updateUI() {
+            if(currentUser) {
+                // You can add user-specific UI updates here
             }
         }
-
+        
         // Helper Functions
         function formatDuration(seconds) {
             const h = Math.floor(seconds / 3600);
             const m = Math.floor((seconds % 3600) / 60);
             const s = Math.floor(seconds % 60);
-            
-            return h > 0 
-                ? `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`
-                : `${m}:${s.toString().padStart(2, '0')}`;
+            return h > 0 ? `${h}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}` 
+                         : `${m}:${s.toString().padStart(2,'0')}`;
         }
-
+        
         function formatNumber(num) {
-            if (num >= 1000000) {
-                return (num / 1000000).toFixed(1) + 'M';
-            }
-            if (num >= 1000) {
-                return (num / 1000).toFixed(1) + 'K';
-            }
-            return num.toString();
+            if(num >= 1000000) return (num/1000000).toFixed(1) + "M";
+            if(num >= 1000) return (num/1000).toFixed(1) + "K";
+            return num;
         }
-
+        
         function formatTimeAgo(timestamp) {
             const seconds = Math.floor((new Date() - timestamp.toDate()) / 1000);
+            const intervals = {
+                year: 31536000,
+                month: 2592000,
+                day: 86400,
+                hour: 3600,
+                minute: 60
+            };
             
-            let interval = Math.floor(seconds / 31536000);
-            if (interval >= 1) return interval + " year" + (interval === 1 ? "" : "s") + " ago";
-            
-            interval = Math.floor(seconds / 2592000);
-            if (interval >= 1) return interval + " month" + (interval === 1 ? "" : "s") + " ago";
-            
-            interval = Math.floor(seconds / 86400);
-            if (interval >= 1) return interval + " day" + (interval === 1 ? "" : "s") + " ago";
-            
-            interval = Math.floor(seconds / 3600);
-            if (interval >= 1) return interval + " hour" + (interval === 1 ? "" : "s") + " ago";
-            
-            interval = Math.floor(seconds / 60);
-            if (interval >= 1) return interval + " minute" + (interval === 1 ? "" : "s") + " ago";
-            
-            return Math.floor(seconds) + " second" + (seconds === 1 ? "" : "s") + " ago";
+            for(const [unit, secondsInUnit] of Object.entries(intervals)) {
+                const interval = Math.floor(seconds / secondsInUnit);
+                if(interval >= 1) {
+                    return interval + " " + unit + (interval === 1 ? "" : "s") + " ago";
+                }
+            }
+            return Math.floor(seconds) + " seconds ago";
         }
-
-        // Initialize the app
+        
+        // Initialize
         initApp();
     </script>
 </body>
-  </html>
+            </html>
